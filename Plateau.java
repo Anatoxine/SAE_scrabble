@@ -21,6 +21,20 @@ public class Plateau {
             {1,4,1,1,1,3,1,1,1,3,1,1,1,4,1},
             {5,1,1,2,1,1,1,5,1,1,1,2,1,1,5}
         };
+        
+    }
+
+    public String toString(){
+        String res="_______________"+this;
+        
+        
+        return res;
+    }
+
+    public static void main(String[] args){
+        Plateau plat;
+        plat = new Plateau();
+        Ut.afficher(plat.toString());
     }
 
     
