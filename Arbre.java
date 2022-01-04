@@ -1,6 +1,6 @@
 public class Arbre {
 
-    public char lettre;
+    public char lettre; //test
     private ArbreListe branches;
 
     public static void main(String[] args) {
