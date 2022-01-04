@@ -39,31 +39,48 @@ public class Plateau {
     }
 
     public String toString(){
-        String res="_______________\n";
+        String res="   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15\n";
+        res+="   ____________________________________________________________\n";
+
         for(int i=0;i<15;i++){
-            res+="|";
+            res+=(i+1)+" |";
 
             for(int j=0;j<15;j++){
 
                 
                 if(!g[i][j].estRecouverte()&& g[i][j].getCouleur()!=1){
-                    res+= g[i][j].getCouleur();
+                    res+= g[i][j].getCouleur()+"   ";
+                }
+                else if(!g[i][j].estRecouverte()&& g[i][j].getCouleur()==1){
+                    res+="    ";
+                }
+                else{
+                    res+= g[i][j].getLettre();
                 }
 
                 
 
             }
 
-            res+="|\n";
+           if(i<13){
+               res+="|\n";
+                res+="\n";
+            }
+            else{
+                res+="|\n";
+            }
+            
         }
+
+        res+="    ____________________________________________________________\n";
         
         return res;
     }
 
     public static void main(String[] args){
-        Plateau plat;
-        plat = new Plateau();
-        Ut.afficher(plat.toString());
+
+        Plateau grille= new Plateau();
+        Ut.afficher(grille.toString());
     }
 
     
