@@ -1,10 +1,11 @@
-public class MME {
+public class MEE {
 
     public static void main(String[] args) {
 
         int[] tab = {4,5,6,9,10,1};
-        MME a = new MME(tab);
+        MEE a = new MEE(tab);
         System.out.println(a.nombreTotalExemplaires);
+        System.out.println(5 + 3);
 
     }
     
@@ -13,14 +14,14 @@ public class MME {
  
     private int nombreTotalExemplaires; //nombre totale d'element dans notre multi-ensemble
 
-    public MME(int max) {
+    public MEE(int max) {
 
         this.tableauFrequence = new int[max];
         this.nombreTotalExemplaires = 0;
 
     }
 
-    public MME(int[] tab) {
+    public MEE(int[] tab) {
 
         this.tableauFrequence = new int[tab.length];
 
@@ -38,5 +39,35 @@ public class MME {
 
         }
     }
+
+    public MEE(MEE e) {
+
+        this.nombreTotalExemplaires = e.nombreTotalExemplaires;
+
+        this.tableauFrequence = new int[e.tableauFrequence.length];
+
+        for (int i = 0; i < this.tableauFrequence.length; i++) {
+
+            this.tableauFrequence[i] = e.tableauFrequence[i];
+
+        }
+
+    }
+
+
+    public boolean estVide() {
+
+        return this.nombreTotalExemplaires == 0;
+
+    }
+
+
+    public void ajoute(int i) {
+
+        this.tableauFrequence[i]++;
+
+    }
+
+
 
 }
