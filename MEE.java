@@ -2,17 +2,25 @@ public class MEE {
 
     public static void main(String[] args) {
 
-        int[] tab = {4,5,6,9,10,1};
+        int[] tab = { 0, 5, 6, 9, 10, 1 };
+        int[] tabBis = { 0, 0, 0, 0, 0, 0 };
+
         MEE a = new MEE(tab);
-        System.out.println(a.nombreTotalExemplaires);
-        System.out.println(5 + 3);
+        MEE b = new MEE(tabBis);
+
+        System.out.println(a);
+        System.out.println(b);
+
+        a.transfereAleat(b, 567);
+
+        System.out.println(a);
+        System.out.println(b);
 
     }
-    
-    private int[] tableauFrequence; /* pour tout indice i, donne le nombre d'exemplaire de la lettre 
-    d'indice i dans l'alphabet (a => indice 0, b => indice 1, etc) */
- 
-    private int nombreTotalExemplaires; //nombre totale d'element dans notre multi-ensemble
+
+    private int[] tableauFrequence;
+
+    private int nombreTotalExemplaires; // nombre totale d'element dans notre multi-ensemble
 
     public MEE(int max) {
 
@@ -54,6 +62,21 @@ public class MEE {
 
     }
 
+    // cette fonction d'affichage me permet de tester
+    // aisément les différentes fonctions de la classe
+    public String toString() {
+
+        String result = "Nombre total d'exemplaires : " + this.nombreTotalExemplaires + "\n\n";
+
+        for (int i = 0; i < this.tableauFrequence.length; i++) {
+
+            result += "Exemplaires de " + i + " : " + this.tableauFrequence[i] + "\n";
+
+        }
+
+        return result;
+
+    }
 
     public boolean estVide() {
 
@@ -61,13 +84,144 @@ public class MEE {
 
     }
 
-
     public void ajoute(int i) {
 
         this.tableauFrequence[i]++;
+        this.nombreTotalExemplaires++;
 
     }
 
+    public boolean retire(int i) {
 
+        boolean result = this.tableauFrequence[i] > 0;
+
+        if (result) {
+
+            this.tableauFrequence[i]--;
+            this.nombreTotalExemplaires--;
+
+        }
+
+        return result;
+
+    }
+
+    public int retireAleat() {
+
+        int nombreExemplairesDifferents = 0;
+
+        for (int i = 0; i < this.tableauFrequence.length; i++) {
+
+            if (tableauFrequence[i] > 0) {
+
+                nombreExemplairesDifferents++;
+
+            }
+
+        }
+
+        int[] tableauExemplairesPresents = new int[nombreExemplairesDifferents];
+
+        int indiceTabFreq = 0;
+        int indiceTabExempPres = 0;
+
+        while (indiceTabExempPres < tableauExemplairesPresents.length && indiceTabFreq < this.tableauFrequence.length) {
+
+            if (this.tableauFrequence[indiceTabFreq] > 0) {
+
+                tableauExemplairesPresents[indiceTabExempPres] = indiceTabFreq;
+                indiceTabExempPres++;
+                indiceTabFreq++;
+
+            } else {
+
+                indiceTabFreq++;
+
+            }
+
+        }
+
+        int indiceAleat = Ut.randomMinMax(0, tableauExemplairesPresents.length - 1);
+
+        int result = tableauExemplairesPresents[indiceAleat];
+
+        this.tableauFrequence[result]--;
+        this.nombreTotalExemplaires--;
+
+        return result;
+
+    }
+
+    public boolean transfere(MEE e, int i) {
+
+        boolean result = this.tableauFrequence[i] > 0;
+
+        if (result) {
+
+            this.tableauFrequence[i]--;
+            this.nombreTotalExemplaires--;
+
+            e.tableauFrequence[i]++;
+            e.nombreTotalExemplaires++;
+
+        }
+
+        return result;
+
+    }
+
+    public int transfereAleat(MEE e, int k) {
+
+        return this.transfereAleatAux(e, k, 0);
+    }
+
+    private int transfereAleatAux(MEE e, int k, int result) {
+
+        if (this.nombreTotalExemplaires == 0 || k == 0) {
+
+            return result;
+
+        } else {
+
+            int nombreExemplairesDifferents = 0;
+
+            for (int i = 0; i < this.tableauFrequence.length; i++) {
+
+                if (this.tableauFrequence[i] > 0)
+                    nombreExemplairesDifferents++;
+
+            }
+
+            int[] tableauExemplairesPresents = new int[nombreExemplairesDifferents];
+
+            int indiceTabFreq = 0;
+            int indiceTabExempPres = 0;
+
+            while (indiceTabExempPres < tableauExemplairesPresents.length
+                    && indiceTabFreq < this.tableauFrequence.length) {
+
+                if (this.tableauFrequence[indiceTabFreq] > 0) {
+
+                    tableauExemplairesPresents[indiceTabExempPres] = indiceTabFreq;
+                    indiceTabExempPres++;
+                    indiceTabFreq++;
+
+                } else {
+
+                    indiceTabFreq++;
+
+                }
+
+            }
+
+            int indiceAleat = Ut.randomMinMax(0, tableauExemplairesPresents.length - 1);
+
+            this.transfere(e, tableauExemplairesPresents[indiceAleat]);
+
+            return this.transfereAleatAux(e, k - 1, result + 1);
+
+        }
+
+    }
 
 }
