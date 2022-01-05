@@ -6,16 +6,12 @@ public class MEE {
         int[] tabBis = { 0, 0, 0, 0, 0, 0 };
 
         MEE a = new MEE(tab);
-        MEE b = new MEE(tabBis);
 
-        System.out.println(a);
-        System.out.println(b);
+        int[] v = { 1, 5, 1, 2, 3, 1, 1, 1, 5, 1 };
 
-        a.transfereAleat(b, 567);
+        int nb = a.sommeValeurs(v);
 
-        System.out.println(a);
-        System.out.println(b);
-
+        System.out.println(nb);
     }
 
     private int[] tableauFrequence;
@@ -221,6 +217,17 @@ public class MEE {
             return this.transfereAleatAux(e, k - 1, result + 1);
 
         }
+
+    }
+
+    public int sommeValeurs(int[] v) {
+
+        int result = 0;
+
+        for (int i = 0; i < this.tableauFrequence.length; i++)
+            result += this.tableauFrequence[i] * v[i];
+
+        return result;
 
     }
 
