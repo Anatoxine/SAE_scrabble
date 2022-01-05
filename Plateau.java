@@ -57,12 +57,9 @@ public class Plateau {
                 else{
                     res+= g[i][j].getLettre();
                 }
-
-                
-
             }
 
-           if(i<13){
+           if(i<14){
                res+="|\n";
                 res+="\n";
             }
@@ -77,10 +74,25 @@ public class Plateau {
         return res;
     }
 
+    public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
+
+    }
+
+    public boolean verifCapeloDico(String mot){
+        boolean res= false;
+        Ut.afficher("le mot "+mot+"existe-t-il bien dans le dictionnaire et est-il en majuscule? Si oui tappez true");
+        if(Ut.saisirBooleen()==true){
+            res=true;
+        }
+        
+        return res;
+    }
+
     public static void main(String[] args){
 
         Plateau grille= new Plateau();
         Ut.afficher(grille.toString());
+        Ut.afficher(verifCapeloDico("kawai"));
     }
 
     
