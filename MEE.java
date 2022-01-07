@@ -7,6 +7,8 @@ public class MEE {
         MEE a = new MEE(tab);
 
         System.out.println(a.contientMot("ABAC"));
+
+        System.out.println(a);
     }
 
     private int[] tableauFrequence;
