@@ -2,16 +2,11 @@ public class MEE {
 
     public static void main(String[] args) {
 
-        int[] tab = { 0, 5, 6, 9, 10, 1 };
-        int[] tabBis = { 0, 0, 0, 0, 0, 0 };
-
+        int[] tab = {2,1,1,0,0};
+        
         MEE a = new MEE(tab);
 
-        int[] v = { 1, 5, 1, 2, 3, 1, 1, 1, 5, 1 };
-
-        int nb = a.sommeValeurs(v);
-
-        System.out.println(nb);
+        System.out.println(a.contientMot("ABAC"));
     }
 
     private int[] tableauFrequence;
@@ -228,6 +223,40 @@ public class MEE {
             result += this.tableauFrequence[i] * v[i];
 
         return result;
+
+    }
+
+    private static int valeurLettre(char lettre) {
+
+        return (int)lettre - 65;
+
+    }
+
+    public boolean contientMot(String mot) {
+
+        MEE temporaire = new MEE(this.tableauFrequence.length);
+
+        boolean testLettre;
+        int indiceLettre;
+
+        boolean resultat = true;
+        int i = 0;
+
+        while(resultat && i < mot.length()) {
+
+            indiceLettre = valeurLettre(mot.charAt(i));
+            testLettre = this.transfere(temporaire, indiceLettre);
+
+
+            if (!testLettre) resultat = false;
+
+            i++;
+
+        }
+
+        temporaire.transfereAleat(this, temporaire.nombreTotalExemplaires);
+
+        return resultat;
 
     }
 

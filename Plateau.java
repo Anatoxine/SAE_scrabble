@@ -74,16 +74,27 @@ public class Plateau {
         return res;
     }
 
-     /* public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
+    public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
         boolean res=false;
-        MEE chevalet= new MEE(26);
 
-        if(mot.length()>=2 && ){
+        if (this.g[7][7].getLettre() == '0') {
 
+            switch (sens) {
+
+                case 'h':
+                res = numLig == 7 && 7 >= numCol && 7 <= numCol + mot.length() && mot.length() >= 2 && e.contientMot(mot);
+                break;
+
+                case 'v':
+                res = numCol == 7 && 7 >= numLig && 7 <= numLig + mot.length() && mot.length() >= 2 && e.contientMot(mot);
+                break;
+            }
+        } else {
+            
         }
 
 
-     } */
+     }
 
     public static boolean verifCapeloDico(String mot){
         Ut.afficher("le mot "+mot+" existe-t-il bien dans le dictionnaire et est-il en majuscule?   Si oui tappez true, sinon tappez false  ");
