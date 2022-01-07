@@ -41,9 +41,9 @@ public class Plateau {
     public String toString(){
         String res="   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15\n";
         res+="   ____________________________________________________________\n";
-
-        for(int i=0;i<15;i++){
-            res+=(i+1)+" |";
+        char let = 'A';
+        for(int i=0;i<15;i++, let++){
+            res+= let +" |";
 
             for(int j=0;j<15;j++){
 
@@ -74,19 +74,21 @@ public class Plateau {
         return res;
     }
 
-    public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
+     public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
+        boolean res=false;
+        MEE chevalet= new MEE(26);
+        if(mot.length()>=2){
 
-    }
-
-    public boolean verifCapeloDico(String mot){
-        boolean res= false;
-        Ut.afficher("le mot "+mot+"existe-t-il bien dans le dictionnaire et est-il en majuscule? Si oui tappez true");
-        if(Ut.saisirBooleen()==true){
-            res=true;
         }
-        
-        return res;
+
+
+     } 
+
+    public static boolean verifCapeloDico(String mot){
+        Ut.afficher("le mot "+mot+" existe-t-il bien dans le dictionnaire et est-il en majuscule?   Si oui tappez true, sinon tappez false  ");
+        return Ut.saisirBooleen();
     }
+
 
     public static void main(String[] args){
 
