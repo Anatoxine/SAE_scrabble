@@ -29,11 +29,7 @@ public class MEE {
 
         this.tableauFrequence = new int[tab.length];
 
-        for (int i = 0; i < tab.length - 1; i++) {
-
-            this.tableauFrequence[i] = tab[i];
-
-        }
+        for (int i = 0; i < tab.length - 1; i++) { this.tableauFrequence[i] = tab[i];}
 
         this.nombreTotalExemplaires = 0;
 
