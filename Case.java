@@ -30,10 +30,9 @@ public class Case {
         }
         return res;
     }
-
-/* public String toString(){
-        String res =
-    } */
+    public String toString(){
+        return this.couleur+ " " + this.lettre;
+    } 
 
 
 }

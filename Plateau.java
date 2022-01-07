@@ -69,20 +69,21 @@ public class Plateau {
             
         }
 
-        res+="    ____________________________________________________________\n";
+        res+="   ____________________________________________________________\n";
         
         return res;
     }
 
-     public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
+     /* public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
         boolean res=false;
         MEE chevalet= new MEE(26);
-        if(mot.length()>=2){
+
+        if(mot.length()>=2 && ){
 
         }
 
 
-     } 
+     } */
 
     public static boolean verifCapeloDico(String mot){
         Ut.afficher("le mot "+mot+" existe-t-il bien dans le dictionnaire et est-il en majuscule?   Si oui tappez true, sinon tappez false  ");
