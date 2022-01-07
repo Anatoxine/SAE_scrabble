@@ -1,80 +1,74 @@
 public class Plateau {
-    
-    private Case [][] g = new Case [15] [15];
 
+    private Case[][] g = new Case[15][15];
 
-    public Plateau(){
+    public Plateau() {
 
-
-        int [][] plateau ={
-            {5,1,1,2,1,1,1,5,1,1,1,2,1,1,5},
-            {1,4,1,1,1,3,1,1,1,3,1,1,1,4,1},
-            {1,1,4,1,1,1,2,1,2,1,1,1,4,1,1},
-            {2,1,1,4,1,1,1,2,1,1,1,4,1,1,2},
-            {1,1,1,1,4,1,1,1,1,1,4,1,1,1,1},
-            {1,3,1,1,1,3,1,1,1,3,1,1,1,3,1},
-            {1,1,2,1,1,1,2,1,2,1,1,1,2,1,1},
-            {5,1,1,2,1,1,1,4,1,1,1,2,1,1,5}, 
-            {1,1,2,1,1,1,2,1,2,1,1,1,2,1,1},
-            {1,3,1,1,1,3,1,1,1,3,1,1,1,3,1},
-            {1,1,1,1,4,1,1,1,1,1,4,1,1,1,1},
-            {2,1,1,4,1,1,1,2,1,1,1,4,1,1,2},
-            {1,1,4,1,1,1,2,1,2,1,1,1,4,1,1},
-            {1,4,1,1,1,3,1,1,1,3,1,1,1,4,1},
-            {5,1,1,2,1,1,1,5,1,1,1,2,1,1,5}
+        int[][] plateau = {
+                { 5, 1, 1, 2, 1, 1, 1, 5, 1, 1, 1, 2, 1, 1, 5 },
+                { 1, 4, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 4, 1 },
+                { 1, 1, 4, 1, 1, 1, 2, 1, 2, 1, 1, 1, 4, 1, 1 },
+                { 2, 1, 1, 4, 1, 1, 1, 2, 1, 1, 1, 4, 1, 1, 2 },
+                { 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1 },
+                { 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1 },
+                { 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1 },
+                { 5, 1, 1, 2, 1, 1, 1, 4, 1, 1, 1, 2, 1, 1, 5 },
+                { 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1 },
+                { 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1 },
+                { 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1 },
+                { 2, 1, 1, 4, 1, 1, 1, 2, 1, 1, 1, 4, 1, 1, 2 },
+                { 1, 1, 4, 1, 1, 1, 2, 1, 2, 1, 1, 1, 4, 1, 1 },
+                { 1, 4, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 1, 4, 1 },
+                { 5, 1, 1, 2, 1, 1, 1, 5, 1, 1, 1, 2, 1, 1, 5 }
         };
-        
-        for(int i=0;i<15;i++){
 
-            for(int j=0;j<15;j++){
-                g[i][j]= new Case(plateau[i][j]);
+        for (int i = 0; i < 15; i++) {
+
+            for (int j = 0; j < 15; j++) {
+                g[i][j] = new Case(plateau[i][j]);
             }
-        
+
         }
     }
-    
 
-    public Plateau (Case[][] plateau) {
+    public Plateau(Case[][] plateau) {
         this.g = plateau;
     }
 
-    public String toString(){
-        String res="   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15\n";
-        res+="   ____________________________________________________________\n";
+    public String toString() {
+        String res = "   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15\n";
+        res += "   ____________________________________________________________\n";
         char let = 'A';
-        for(int i=0;i<15;i++, let++){
-            res+= let +" |";
+        for (int i = 0; i < 15; i++, let++) {
+            res += let + " |";
 
-            for(int j=0;j<15;j++){
+            for (int j = 0; j < 15; j++) {
 
-                
-                if(!g[i][j].estRecouverte()&& g[i][j].getCouleur()!=1){
-                    res+= g[i][j].getCouleur()+"   ";
-                }
-                else if(!g[i][j].estRecouverte()&& g[i][j].getCouleur()==1){
-                    res+="    ";
-                }
-                else{
-                    res+= g[i][j].getLettre();
+                if (!g[i][j].estRecouverte() && g[i][j].getCouleur() != 1) {
+                    res += g[i][j].getCouleur() + "   ";
+                } else if (!g[i][j].estRecouverte() && g[i][j].getCouleur() == 1) {
+                    res += "    ";
+                } else {
+                    res += g[i][j].getLettre();
                 }
             }
 
-           if(i<14){
-               res+="|\n";
-                res+="\n";
+            if (i < 14) {
+                res += "|\n";
+                res += "\n";
+            } else {
+                res += "|\n";
             }
-            else{
-                res+="|\n";
-            }
-            
+
         }
 
-        res+="   ____________________________________________________________\n";
-        
+        res += "   ____________________________________________________________\n";
+
         return res;
     }
 
     public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
+
         boolean res=false;
 
         if (this.g[7][7].getLettre() == '0') {
@@ -89,25 +83,76 @@ public class Plateau {
                 res = numCol == 7 && 7 >= numLig && 7 <= numLig + mot.length() && mot.length() >= 2 && e.contientMot(mot);
                 break;
             }
+
         } else {
-            
+
+            boolean depassement = sens == 'v' ? numCol + mot.length() <= 14 : numLig + mot.length() <= 14;
+
+            boolean niPrecedeeNiSuivie = sens == 'v' ? numLig == 0 || this.g[numLig - 1][numCol].estRecouverte() : numCol == 0 || this.g[numLig][numCol - 1].estRecouverte();
+
+            boolean auMoinsUneNonRecouverte = false;
+            boolean auMoinsUneRecouverte = false;
+            boolean lettreCorrespond = true;
+
+            String motNonPresent = "";
+
+            if (sens == 'v') {
+
+                for(int i = numLig; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte && lettreCorrespond; i++) {
+ 
+                    if (this.g[i][numCol].estRecouverte()) {
+
+                        auMoinsUneRecouverte = true;
+                        lettreCorrespond = this.g[i][numCol].getLettre() == mot.charAt(i);
+
+                    } else {
+
+                        auMoinsUneNonRecouverte = true;
+                        motNonPresent += mot.charAt(i);
+
+                    }
+
+                }
+
+            } else {
+
+                for(int i = numCol; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte && lettreCorrespond; i++) {
+ 
+                    if (this.g[numLig][i].estRecouverte()) {
+
+                        auMoinsUneRecouverte = true;
+                        lettreCorrespond = this.g[numLig][i].getLettre() == mot.charAt(i);
+
+                    } else {
+
+                        auMoinsUneNonRecouverte = true;
+                        motNonPresent += mot.charAt(i);
+
+                    }
+
+                }
+
+                res = depassement && niPrecedeeNiSuivie && e.contientMot(motNonPresent) && auMoinsUneNonRecouverte && auMoinsUneRecouverte && lettreCorrespond;
+
+            }
+
         }
 
+        return res;
 
      }
 
-    public static boolean verifCapeloDico(String mot){
-        Ut.afficher("le mot "+mot+" existe-t-il bien dans le dictionnaire et est-il en majuscule?   Si oui tappez true, sinon tappez false  ");
+    public static boolean verifCapeloDico(String mot) {
+        Ut.afficher("le mot " + mot
+                + " existe-t-il bien dans le dictionnaire et est-il en majuscule?   Si oui tappez true, sinon tappez false  ");
         return Ut.saisirBooleen();
     }
 
+    public static void main(String[] args) {
 
-    public static void main(String[] args){
-
-        Plateau grille= new Plateau();
+        Plateau grille = new Plateau();
         Ut.afficher(grille.toString());
         Ut.afficher(verifCapeloDico("kawai"));
     }
 
-    
 }
