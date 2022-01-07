@@ -154,7 +154,7 @@ public class MEE {
 
         if (result) {
 
-            this.tableauFrequence[i]--;
+            this.tableauFrequence[ i]--;
             this.nombreTotalExemplaires--;
 
             e.tableauFrequence[i]++;
