@@ -353,7 +353,7 @@ public class MEE {
      * action : teste si le mot pllacé en paramètre est contenu dans this 
      * (qui représentera un chevalet)
      * @param mot
-     * @return true si et seulement si les lettres représantées dans this peuvent
+     * @return true si et seulement si les lettres représentées dans this peuvent
      * contenir mot
      */
     public boolean contientMot(String mot) {
