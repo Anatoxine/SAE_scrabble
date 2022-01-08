@@ -98,7 +98,7 @@ public class Plateau {
 
             boolean depassement = sens == 'v' ? numCol + mot.length() <= 14 : numLig + mot.length() <= 14;
             depassement = depassement && numCol >= 0 && numLig >= 0;
-            
+
             boolean niPrecedeeNiSuivie = sens == 'v' ? numLig == 0 || this.g[numLig - 1][numCol].estRecouverte()
                     : numCol == 0 || this.g[numLig][numCol - 1].estRecouverte();
 
