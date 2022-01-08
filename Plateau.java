@@ -1,11 +1,11 @@
 public class Plateau {
 
-      public static void main(String[] args) {
+    public static void main(String[] args) {
 
         Plateau grille = new Plateau();
         Ut.afficher(grille.toString());
         Ut.afficher(verifCapeloDico("kawai"));
-        
+
     }
 
     private Case[][] g = new Case[15][15];
@@ -75,28 +75,32 @@ public class Plateau {
         return res;
     }
 
-    public boolean placementValide(String mot,int numLig, int numCol,char sens,MEE e){
+    public boolean placementValide(String mot, int numLig, int numCol, char sens, MEE e) {
 
-        boolean res=false;
+        boolean res = false;
 
         if (this.g[7][7].getLettre() == '0') {
 
             switch (sens) {
 
                 case 'h':
-                res = numLig == 7 && 7 >= numCol && 7 <= numCol + mot.length() && mot.length() >= 2 && e.contientMot(mot);
-                break;
+                    res = numLig == 7 && 7 >= numCol && 7 <= numCol + mot.length() && mot.length() >= 2
+                            && e.contientMot(mot);
+                    break;
 
                 case 'v':
-                res = numCol == 7 && 7 >= numLig && 7 <= numLig + mot.length() && mot.length() >= 2 && e.contientMot(mot);
-                break;
+                    res = numCol == 7 && 7 >= numLig && 7 <= numLig + mot.length() && mot.length() >= 2
+                            && e.contientMot(mot);
+                    break;
             }
 
         } else {
 
             boolean depassement = sens == 'v' ? numCol + mot.length() <= 14 : numLig + mot.length() <= 14;
-
-            boolean niPrecedeeNiSuivie = sens == 'v' ? numLig == 0 || this.g[numLig - 1][numCol].estRecouverte() : numCol == 0 || this.g[numLig][numCol - 1].estRecouverte();
+            depassement = depassement && numCol >= 0 && numLig >= 0;
+            
+            boolean niPrecedeeNiSuivie = sens == 'v' ? numLig == 0 || this.g[numLig - 1][numCol].estRecouverte()
+                    : numCol == 0 || this.g[numLig][numCol - 1].estRecouverte();
 
             boolean auMoinsUneNonRecouverte = false;
             boolean auMoinsUneRecouverte = false;
@@ -106,8 +110,9 @@ public class Plateau {
 
             if (sens == 'v') {
 
-                for(int i = numLig; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte && lettreCorrespond; i++) {
- 
+                for (int i = numLig; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte
+                        && lettreCorrespond; i++) {
+
                     if (this.g[i][numCol].estRecouverte()) {
 
                         auMoinsUneRecouverte = true;
@@ -124,8 +129,9 @@ public class Plateau {
 
             } else {
 
-                for(int i = numCol; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte && lettreCorrespond; i++) {
- 
+                for (int i = numCol; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte
+                        && lettreCorrespond; i++) {
+
                     if (this.g[numLig][i].estRecouverte()) {
 
                         auMoinsUneRecouverte = true;
@@ -140,7 +146,8 @@ public class Plateau {
 
                 }
 
-                res = depassement && niPrecedeeNiSuivie && e.contientMot(motNonPresent) && auMoinsUneNonRecouverte && auMoinsUneRecouverte && lettreCorrespond;
+                res = depassement && niPrecedeeNiSuivie && e.contientMot(motNonPresent) && auMoinsUneNonRecouverte
+                        && auMoinsUneRecouverte && lettreCorrespond;
 
             }
 
@@ -148,7 +155,7 @@ public class Plateau {
 
         return res;
 
-     }
+    }
 
     public static boolean verifCapeloDico(String mot) {
         Ut.afficher("le mot " + mot
@@ -156,86 +163,84 @@ public class Plateau {
         return Ut.saisirBooleen();
     }
 
-    
+    public int nbPointsPlacement(String mot, int numLig, int numCol, char sens, int[] nbPointsJet) {
 
-    public int nbPointsPlacement(String mot, int numLig,int numCol, char sens, int[]nbPointsJet){
+        int nbPoint = 0;
+        int motCompteDouble = 0;
+        boolean motCompteTriple = false;
 
-        int nbPoint=0;
-        int motCompteDouble=0;
-        boolean motCompteTriple=false;
+        if (sens == 'h') {
 
-        if(sens=='h'){
+            for (int i = 0; i < mot.length(); i++) {
 
-            for(int i=0;i<mot.length();i++){
+                if (g[numLig][numCol + i].getCouleur() < 4) {
 
-                if(g[numLig][numCol+i].getCouleur()<4){
+                    nbPoint += nbPointsJet[mot.charAt(i)] * g[numLig][numCol + i].getCouleur();
 
-                    nbPoint+=nbPointsJet[mot.charAt(i)]*g[numLig][numCol+i].getCouleur();
-                    
+                } else {
 
-                }else{
+                    nbPoint += nbPointsJet[mot.charAt(i)];
 
-                    nbPoint+=nbPointsJet[mot.charAt(i)];
+                    switch (g[numLig][numCol + i].getCouleur()) {
 
-                    switch(g[numLig][numCol+i].getCouleur()){
-
-                        case 4: motCompteDouble++;
-                        case 5: motCompteTriple=true;
+                        case 4:
+                            motCompteDouble++;
+                        case 5:
+                            motCompteTriple = true;
                     }
                 }
 
             }
 
+        } else {
 
-        }
-        else{
+            for (int i = 0; i < mot.length(); i++) {
 
-            for(int i=0;i<mot.length();i++){
+                if (g[numLig + i][numCol].getCouleur() < 4) {
 
-                if(g[numLig+i][numCol].getCouleur()<4){
+                    nbPoint += nbPointsJet[mot.charAt(i)] * g[numLig + i][numCol].getCouleur();
 
-                    nbPoint+=nbPointsJet[mot.charAt(i)]*g[numLig+i][numCol].getCouleur();
-                
                 }
 
-                else{
+                else {
 
-                    nbPoint+=nbPointsJet[mot.charAt(i)];
+                    nbPoint += nbPointsJet[mot.charAt(i)];
 
-                    switch(g[numLig+i][numCol].getCouleur()){
+                    switch (g[numLig + i][numCol].getCouleur()) {
 
-                        case 4: motCompteDouble++;
-                        case 5: motCompteTriple=true;
+                        case 4:
+                            motCompteDouble++;
+                        case 5:
+                            motCompteTriple = true;
                     }
                 }
 
             }
         }
 
+        nbPoint = nbPoint * Ut.puissance(2, motCompteDouble);
 
-        nbPoint=nbPoint*Ut.puissance(2,motCompteDouble);
+        if (motCompteTriple) {
 
-        if(motCompteTriple){
-
-                nbPoint=nbPoint*3;
+            nbPoint = nbPoint * 3;
         }
 
         return nbPoint;
     }
 
-    public int place(String mot, int numLig, int numCol, char sens, MEE e){
+    public int place(String mot, int numLig, int numCol, char sens, MEE e) {
 
-        if(sens=='h'){
+        if (sens == 'h') {
 
-            for(int i=0;i<mot.length();i++){
-                g[numLig][numCol+i].setLettre(mot.charAt(i));
+            for (int i = 0; i < mot.length(); i++) {
+                g[numLig][numCol + i].setLettre(mot.charAt(i));
             }
         }
 
-        else{
+        else {
 
-            for(int i=0;i<mot.length();i++){
-                g[numLig+i][numCol].setLettre(mot.charAt(i));
+            for (int i = 0; i < mot.length(); i++) {
+                g[numLig + i][numCol].setLettre(mot.charAt(i));
             }
 
         }
