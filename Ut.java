@@ -27,9 +27,7 @@ public class Ut {
     }
 
 	public static int puissance(int a, int n) {
-
 		return n == 0 ? 1 : a*puissance(a, n - 1);
-		
 	}
 
     public static void passerALaLigne () {
