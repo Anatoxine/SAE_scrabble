@@ -165,12 +165,23 @@ public class Joueur {
         System.out.println("Quelles lettres voulez vous échanger ?");
         String mot = Ut.saisirChaine().toUpperCase();
 
-        while (!this.estCorrectPourEchange(mot)) {
+        while (!this.estCorrectPourEchange(mot) || !(sac.getNbTotEx() >= mot.length())) {
 
-            System.out.println("Vous ne possédez pas une ou plusieurs de ces lettres, veuillez recommencer");
+            if (!this.estCorrectPourEchange(mot)) {
 
-            System.out.println("Quelles lettres voulez vous échanger ?");
-            mot = Ut.saisirChaine().toUpperCase();
+                System.out.println("Vous ne possédez pas une ou plusieurs de ces lettres, veuillez recommencer");
+
+                System.out.println("Quelles lettres voulez vous échanger ?");
+                mot = Ut.saisirChaine().toUpperCase();
+
+            } else {
+
+                System.out.println("Le sac n'a pas assez de lettres, il n'en contient que " + sac.getNbTotEx() + ", veuillez recommencer");
+
+                System.out.println("Quelles lettres voulez vous échanger ?");
+                mot = Ut.saisirChaine().toUpperCase();
+                
+            }
 
         }
 
