@@ -234,6 +234,7 @@ public class Plateau {
 
             for (int i = 0; i < mot.length(); i++) {
                 g[numLig][numCol + i].setLettre(mot.charAt(i));
+                e.retire( g[numLig][numCol + i].getLettre());
             }
         }
 
@@ -241,6 +242,7 @@ public class Plateau {
 
             for (int i = 0; i < mot.length(); i++) {
                 g[numLig + i][numCol].setLettre(mot.charAt(i));
+                e.retire(g[numLig + i][numCol].getLettre());
             }
 
         }
