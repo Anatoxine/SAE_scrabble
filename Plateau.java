@@ -1,5 +1,12 @@
 public class Plateau {
 
+      public static void main(String[] args) {
+
+        Plateau grille = new Plateau();
+        Ut.afficher(grille.toString());
+        Ut.afficher(verifCapeloDico("kawai"));
+    }
+
     private Case[][] g = new Case[15][15];
 
     public Plateau() {
@@ -148,11 +155,73 @@ public class Plateau {
         return Ut.saisirBooleen();
     }
 
-    public static void main(String[] args) {
+    
 
-        Plateau grille = new Plateau();
-        Ut.afficher(grille.toString());
-        Ut.afficher(verifCapeloDico("kawai"));
+    public int nbPointsPlacement(String mot, int numLig,int numCol, char sens, int[]nbPointsJet){
+
+        int nbPoint=0;
+        int motCompteDouble=0;
+        boolean motCompteTriple=false;
+
+        if(sens=='h'){
+
+            for(int i=0;i<mot.length();i++){
+
+                if(g[numLig][numCol+i].getCouleur()<4){
+
+                    nbPoint+=nbPointsJet[mot.charAt(i)]*g[numLig][numCol+i].getCouleur();
+                    
+
+                }else{
+
+                    nbPoint+=nbPointsJet[mot.charAt(i)];
+
+                    switch(g[numLig][numCol+i].getCouleur()){
+
+                        case 4: motCompteDouble++;
+                        case 5: motCompteTriple=true;
+                    }
+                }
+
+            }
+
+
+        }
+        else{
+
+            for(int i=0;i<mot.length();i++){
+
+                if(g[numLig+i][numCol].getCouleur()<4){
+
+                    nbPoint+=nbPointsJet[mot.charAt(i)]*g[numLig+i][numCol].getCouleur();
+                
+                }
+
+                else{
+
+                    nbPoint+=nbPointsJet[mot.charAt(i)];
+
+                    switch(g[numLig+i][numCol].getCouleur()){
+
+                        case 4: motCompteDouble++;
+                        case 5: motCompteTriple=true;
+                    }
+                }
+
+            
+
+            }
+        }
+
+
+        nbPoint=nbPoint*Ut.puissance(2,motCompteDouble);
+
+        if(motCompteTriple){
+
+                nbPoint=nbPoint*3;
+        }
+
+        return nbPoint;
     }
 
-}
+} // end class
