@@ -5,6 +5,7 @@ public class Plateau {
         Plateau grille = new Plateau();
         Ut.afficher(grille.toString());
         Ut.afficher(verifCapeloDico("kawai"));
+        
     }
 
     private Case[][] g = new Case[15][15];
@@ -208,8 +209,6 @@ public class Plateau {
                     }
                 }
 
-            
-
             }
         }
 
@@ -222,6 +221,25 @@ public class Plateau {
         }
 
         return nbPoint;
+    }
+
+    public int place(String mot, int numLig, int numCol, char sens, MEE e){
+
+        if(sens=='h'){
+
+            for(int i=0;i<mot.length();i++){
+                g[numLig][numCol+i].setLettre(mot.charAt(i));
+            }
+        }
+
+        else{
+
+            for(int i=0;i<mot.length();i++){
+                g[numLig+i][numCol].setLettre(mot.charAt(i));
+            }
+
+        }
+        return mot.length();
     }
 
 } // end class
