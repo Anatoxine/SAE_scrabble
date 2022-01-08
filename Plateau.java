@@ -155,4 +155,38 @@ public class Plateau {
         Ut.afficher(verifCapeloDico("kawai"));
     }
 
-}
+    public int nbPointsPlacement(String mot, int numLig,int numCol, char sens, int[]nbPointsJet){
+
+        int nbPoint=0;
+        int motCompteDouble=0;
+        boolean motCompteTriple=false;
+
+        if(sens==h){
+
+            for(int i=0;i<mot.length();i++){
+
+                if(g[numLig][numCol+i].getCouleur<4){
+
+                    nbPoint+=nbPointsJet[mot.charAt(i)]*g[numLig][numCol+i].getCouleur();
+                    
+
+                }else{
+
+                    nbPoint+=nbPointsJet[mot.charAt(i)];
+
+                    switch(g[numLig][numCol+i].getCouleur()){
+
+                        case 4: motCompteDouble++;
+                        case 5: motCompteTriple=true;
+                    }
+                }
+
+            }
+
+        }
+        else{
+
+        }
+    }
+
+} // end class
