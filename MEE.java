@@ -88,6 +88,16 @@ public class MEE {
     }
 
     /**
+     * Accesseur du nombre total d'exemplaire
+     * @return le nombre d'entiers contenus dans this
+     */
+    public int getNbTotEx() {
+
+        return this.nbTotEx;
+
+    }
+
+    /**
      * fonction d'affichage qui permet de tester aisément les différentes
      * méthodes de cette classe (donc utile lors de sa création)
      */
