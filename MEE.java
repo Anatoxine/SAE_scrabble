@@ -341,7 +341,7 @@ public class MEE {
      * @param lettre
      * @return un valeur numérique correspondant à lettre
      */
-    private static int valeurLettre(char lettre) {
+    public static int valeurLettre(char lettre) {
 
         return (int) lettre - 65;
 
