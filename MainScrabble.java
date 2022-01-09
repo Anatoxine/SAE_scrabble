@@ -7,14 +7,15 @@ public class MainScrabble  {
 
 		while(!commencer){
 
-		Ut.afficher("Saisissez le nombre de joueur.");
-		nbJoueur =Ut.saisirEntier();
+			Ut.afficher("Saisissez le nombre de joueur.");
+			nbJoueur =Ut.saisirEntier();
 
-		if(1<=nbJoueur && nbJoueur<15 ){
-			commencer=true;
-		}
+			if(1<=nbJoueur && nbJoueur<15 ){
+				commencer=true;
+			}
 
 		}
+		
 		String [] nomJoueur= new String [nbJoueur];
 
 		for(int i=0;i<nbJoueur;i++){
