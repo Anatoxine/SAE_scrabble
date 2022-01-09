@@ -2,8 +2,13 @@ public class Scrabble {
 
     public static void main(String[] args) {
 
-        Joueur[] joueurs = {new Joueur("beuteu")};
-        new Scrabble(joueurs);
+      //  Joueur[] joueurs = {new Joueur("beuteu")};
+      //  new Scrabble(joueurs);
+        int []tab={3,2,5};
+        MEE chevalet= new MEE (tab);
+        Plateau plateau=new Plateau();
+        Ut.afficher(plateau.placementValide("AAA",7,7,'h',chevalet));
+        Ut.afficher(plateau.nbPointsPlacement("AAA", 1, 1, 'h', nbPointsJeton));
 
     }
     

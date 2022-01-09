@@ -3,8 +3,7 @@ public class Plateau {
     public static void main(String[] args) {
 
         Plateau grille = new Plateau();
-        Ut.afficher(grille.toString());
-        Ut.afficher(verifCapeloDico("kawai"));
+        
 
     }
 
