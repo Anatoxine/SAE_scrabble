@@ -142,7 +142,7 @@ public class Joueur {
         System.out.println("Saisissez la position de la première lettre sur le plateau.");
         System.out.print("Numéro de ligne : ");
         int numLig = Ut.saisirEntier();
-        System.out.print("\nNuméro de colonne : ");
+        System.out.print("Numéro de colonne : ");
         int numCol = Ut.saisirEntier();
 
         System.out.println("Dans quelle sens voulez vous placer le mot ?");
@@ -152,12 +152,11 @@ public class Joueur {
         if (p.placementValide(mot, numLig, numCol, sens, this.chevalet) && Plateau.verifCapeloDico(mot)) {
 
             this.joueMotAux(p, s, nbPointsJet, mot, numLig, numCol, sens);
-            System.out.println("Placment valide");
             return true;
 
         } else {
 
-            System.out.println("Placment pas valide");
+            System.out.println("Placment non valide");
             return false;
 
         }

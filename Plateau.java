@@ -56,7 +56,7 @@ public class Plateau {
                 } else if (!g[i][j].estRecouverte() && g[i][j].getCouleur() == 1) {
                     res += "    ";
                 } else {
-                    res += g[i][j].getLettre();
+                    res += g[i][j].getLettre() + "   ";
                 }
             }
 
@@ -174,11 +174,11 @@ public class Plateau {
 
                 if (g[numLig][numCol + i].getCouleur() < 4) {
 
-                    nbPoint += nbPointsJet[mot.charAt(i)] * g[numLig][numCol + i].getCouleur();
+                    nbPoint += nbPointsJet[MEE.valeurLettre(mot.charAt(i))] * g[numLig][numCol + i].getCouleur();
 
                 } else {
 
-                    nbPoint += nbPointsJet[mot.charAt(i)];
+                    nbPoint += nbPointsJet[MEE.valeurLettre(mot.charAt(i))];
 
                     switch (g[numLig][numCol + i].getCouleur()) {
 
@@ -233,7 +233,7 @@ public class Plateau {
 
             for (int i = 0; i < mot.length(); i++) {
                 g[numLig][numCol + i].setLettre(mot.charAt(i));
-                e.retire( g[numLig][numCol + i].getLettre());
+                e.retire( MEE.valeurLettre(g[numLig][numCol + i].getLettre()));
             }
         }
 
@@ -241,7 +241,7 @@ public class Plateau {
 
             for (int i = 0; i < mot.length(); i++) {
                 g[numLig + i][numCol].setLettre(mot.charAt(i));
-                e.retire(g[numLig + i][numCol].getLettre());
+                e.retire(MEE.valeurLettre(g[numLig + i][numCol].getLettre()));
             }
 
         }

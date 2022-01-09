@@ -5,16 +5,6 @@
  */
 public class MEE {
 
-    public static void main(String[] args) {
-
-        int[] tab = { 2, 1, 1, 0, 0 };
-
-        MEE a = new MEE(tab);
-
-        System.out.println(MEE.lettreDIndice(0));
-        System.out.println(a.toStringBis());
-    }
-
     /**
      * descriptioon : tableau répertoriant le nombre d'exemplaires de chaque entier (correspondant
      * aux indices) dans notre MEE
@@ -396,7 +386,6 @@ public class MEE {
         while (resultat && i < mot.length()) {
 
             indiceLettre = MEE.valeurLettre(mot.charAt(i));
-            System.out.println(mot.charAt(i));
             testLettre = this.transfere(temporaire, indiceLettre);
 
             if (!testLettre)

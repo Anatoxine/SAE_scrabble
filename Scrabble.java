@@ -1,17 +1,5 @@
 public class Scrabble {
 
-    public static void main(String[] args) {
-
-        String[] joueurs = {
-            "Tanguy",
-            "Anais",
-            "Lucas",
-            "Ta mere la salope"
-        };
-        Scrabble test = new Scrabble(joueurs);
-        test.partie();
-    }
-
     private Joueur[] joueurs;
     private int numJoueur;
     private Plateau plateau;
@@ -64,11 +52,15 @@ public class Scrabble {
 
             System.out.println(this);
 
+            joueurCourant = this.joueurs[this.numJoueur];
+
             int action = joueurCourant.joue(this.plateau, this.sac, Scrabble.nbPointsJeton);
 
             nbJPassantLeurTour = action == -1
                     ? nbJPassantLeurTour + 1
                     : 0;
+
+            joueurCourant.prendJetons(this.sac, 7 - joueurCourant.getChevalet().getNbTotEx());
 
             this.numJoueur = this.joueurSuivant();
 
