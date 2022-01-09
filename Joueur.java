@@ -152,10 +152,12 @@ public class Joueur {
         if (p.placementValide(mot, numLig, numCol, sens, this.chevalet) && Plateau.verifCapeloDico(mot)) {
 
             this.joueMotAux(p, s, nbPointsJet, mot, numLig, numCol, sens);
+            System.out.println("Placment valide");
             return true;
 
         } else {
 
+            System.out.println("Placment pas valide");
             return false;
 
         }
