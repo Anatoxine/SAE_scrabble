@@ -2,8 +2,14 @@ public class Scrabble {
 
     public static void main(String[] args) {
 
-
-
+        String[] joueurs = {
+            "Tanguy",
+            "Anais",
+            "Lucas",
+            "Ta mere la salope"
+        };
+        Scrabble test = new Scrabble(joueurs);
+        test.partie();
     }
 
     private Joueur[] joueurs;
@@ -93,5 +99,5 @@ public class Scrabble {
                 max = this.joueurs[i].getScore();
 
         return max;
-    } */ 
+    } 
 }
