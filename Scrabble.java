@@ -20,7 +20,10 @@ public class Scrabble {
 
     public Scrabble(String[] joueurs) {
 
-        this.joueurs = joueurs;
+        this.joueurs = new Joueur[joueurs.length];
+
+        for(int i = 0; i < joueurs.length; i++) this.joueurs[i] = new Joueur(joueurs[i]);
+        
         this.numJoueur = Ut.randomMinMax(1, joueurs.length);
         this.plateau = new Plateau();
         int[] distributionLettres = {9,2,2,3,15,2,2,2,8,1,1,5,3,6,6,2,1,6,6,6,6,2,1,1,1,1};
