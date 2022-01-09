@@ -40,6 +40,14 @@ public class Joueur {
 
     }
 
+    public String getNom() {
+        return this.nom;
+    }
+
+    public MEE getChevalet() {
+        return this.chevalet;
+    }
+
     /**
      * action : augmente le score du Joueur du nombre de points passé en paramètre
      * 
@@ -157,6 +165,9 @@ public class Joueur {
     public void joueMotAux(Plateau p, MEE s, int[] nbPointsJet, String mot, int numLig, int numCol, char sens) {
 
         p.place(mot, numLig, numCol, sens, this.chevalet);
+        int points  = p.nbPointsPlacement(mot, numLig, numCol, sens, Scrabble.nbPointsJeton);
+        this.ajouteScore(points);
+        System.out.println(this.nom + points + " points !");
 
     }
 

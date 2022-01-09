@@ -1,6 +1,12 @@
 public class Plateau {
 
-   
+    public static void main(String[] args) {
+
+        Plateau grille = new Plateau();
+        
+
+    }
+
     private Case[][] g = new Case[15][15];
 
     public Plateau() {
@@ -50,7 +56,7 @@ public class Plateau {
                 } else if (!g[i][j].estRecouverte() && g[i][j].getCouleur() == 1) {
                     res += "    ";
                 } else {
-                    res += g[i][j].getLettre() + "   ";
+                    res += g[i][j].getLettre();
                 }
             }
 
@@ -89,29 +95,11 @@ public class Plateau {
 
         } else {
 
-            boolean depassement = sens == 'v'
-                    ? numLig + mot.length() <= 14
-                    : numCol + mot.length() <= 14;
-
-            
-
+            boolean depassement = sens == 'v' ? numCol + mot.length() <= 14 : numLig + mot.length() <= 14;
             depassement = depassement && numCol >= 0 && numLig >= 0;
 
-            boolean niPrecedeeNiSuivie = sens == 'v'
-                    ? (numLig == 0 || !this.g[numLig - 1][numCol].estRecouverte())
-                            && (numLig + mot.length() - 1 == 14
-                                    || !this.g[numLig + mot.length()][numCol].estRecouverte())
-                    : (numCol == 0 || !this.g[numLig][numCol - 1].estRecouverte())
-                            && (numCol + mot.length() - 1 == 14
-                                    || !this.g[numLig][numCol + mot.length()].estRecouverte());
-
-            /*
-             * System.out.println("droite " + (numLig + mot.length() - 1 == 14 ||
-             * !this.g[numLig + mot.length()][numCol].estRecouverte()));
-             * System.out.println("gauche " + (numLig == 0 || !this.g[numLig -
-             * 1][numCol].estRecouverte()));
-             * System.out.println("gg " + (numLig + mot.length() - 1 == 14));
-             */
+            boolean niPrecedeeNiSuivie = sens == 'v' ? numLig == 0 || this.g[numLig - 1][numCol].estRecouverte()
+                    : numCol == 0 || this.g[numLig][numCol - 1].estRecouverte();
 
             boolean auMoinsUneNonRecouverte = false;
             boolean auMoinsUneRecouverte = false;
@@ -121,17 +109,18 @@ public class Plateau {
 
             if (sens == 'v') {
 
-                for (int i = numLig; i < numLig + mot.length(); i++) {
+                for (int i = numLig; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte
+                        && lettreCorrespond; i++) {
 
                     if (this.g[i][numCol].estRecouverte()) {
 
                         auMoinsUneRecouverte = true;
-                        lettreCorrespond = this.g[i][numCol].getLettre() == mot.charAt(i - numLig);
+                        lettreCorrespond = this.g[i][numCol].getLettre() == mot.charAt(i);
 
                     } else {
 
                         auMoinsUneNonRecouverte = true;
-                        motNonPresent += mot.charAt(i - numLig);
+                        motNonPresent += mot.charAt(i);
 
                     }
 
@@ -139,30 +128,27 @@ public class Plateau {
 
             } else {
 
-                for (int i = numCol; i < numCol + mot.length(); i++) {
+                for (int i = numCol; i < mot.length() && !auMoinsUneRecouverte && !auMoinsUneNonRecouverte
+                        && lettreCorrespond; i++) {
 
                     if (this.g[numLig][i].estRecouverte()) {
 
                         auMoinsUneRecouverte = true;
-                        lettreCorrespond = this.g[numLig][i].getLettre() == mot.charAt(i - numCol);
+                        lettreCorrespond = this.g[numLig][i].getLettre() == mot.charAt(i);
 
                     } else {
 
                         auMoinsUneNonRecouverte = true;
-                        motNonPresent += mot.charAt(i - numCol);
+                        motNonPresent += mot.charAt(i);
 
                     }
 
                 }
 
-                
-
-            }
-
-            res = depassement && niPrecedeeNiSuivie && e.contientMot(motNonPresent) && auMoinsUneNonRecouverte
+                res = depassement && niPrecedeeNiSuivie && e.contientMot(motNonPresent) && auMoinsUneNonRecouverte
                         && auMoinsUneRecouverte && lettreCorrespond;
 
-           
+            }
 
         }
 
@@ -188,20 +174,18 @@ public class Plateau {
 
                 if (g[numLig][numCol + i].getCouleur() < 4) {
 
-                    nbPoint += nbPointsJet[MEE.valeurLettre(mot.charAt(i))] * g[numLig][numCol + i].getCouleur();
+                    nbPoint += nbPointsJet[mot.charAt(i)] * g[numLig][numCol + i].getCouleur();
 
                 } else {
 
-                    nbPoint += nbPointsJet[MEE.valeurLettre(mot.charAt(i))];
+                    nbPoint += nbPointsJet[mot.charAt(i)];
 
                     switch (g[numLig][numCol + i].getCouleur()) {
 
                         case 4:
                             motCompteDouble++;
-                            break;
                         case 5:
                             motCompteTriple = true;
-                            break;
                     }
                 }
 
@@ -213,23 +197,20 @@ public class Plateau {
 
                 if (g[numLig + i][numCol].getCouleur() < 4) {
 
-                    nbPoint += nbPointsJet[MEE.valeurLettre(mot.charAt(i))] * g[numLig + i][numCol].getCouleur();
+                    nbPoint += nbPointsJet[mot.charAt(i)] * g[numLig + i][numCol].getCouleur();
 
                 }
 
                 else {
 
-                    nbPoint += nbPointsJet[MEE.valeurLettre(mot.charAt(i))];
+                    nbPoint += nbPointsJet[mot.charAt(i)];
 
                     switch (g[numLig + i][numCol].getCouleur()) {
 
                         case 4:
                             motCompteDouble++;
-                            break;
                         case 5:
                             motCompteTriple = true;
-                            break;
-
                     }
                 }
 
@@ -252,7 +233,7 @@ public class Plateau {
 
             for (int i = 0; i < mot.length(); i++) {
                 g[numLig][numCol + i].setLettre(mot.charAt(i));
-                e.retire(MEE.valeurLettre(g[numLig][numCol + i].getLettre()));
+                e.retire( g[numLig][numCol + i].getLettre());
             }
         }
 
@@ -260,7 +241,7 @@ public class Plateau {
 
             for (int i = 0; i < mot.length(); i++) {
                 g[numLig + i][numCol].setLettre(mot.charAt(i));
-                e.retire(MEE.valeurLettre(g[numLig + i][numCol].getLettre()));
+                e.retire(g[numLig + i][numCol].getLettre());
             }
 
         }

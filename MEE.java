@@ -11,9 +11,8 @@ public class MEE {
 
         MEE a = new MEE(tab);
 
-        System.out.println(a.contientMot("ABAC"));
-
-        System.out.println(a);
+        System.out.println(MEE.lettreDIndice(0));
+        System.out.println(a.toStringBis());
     }
 
     /**
@@ -113,6 +112,19 @@ public class MEE {
 
         return result;
 
+    }
+
+    public String toStringBis() {
+
+        String res = "Chevalet : ";
+
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < this.tabFreq[i]; j++) {
+                res += MEE.lettreDIndice(i) + " ";
+            }
+        }
+
+        return res;
     }
 
     /**
@@ -355,6 +367,11 @@ public class MEE {
 
         return (int) lettre - 65;
 
+    }
+
+    public static char lettreDIndice(int indice) {
+
+        return (char) (indice + 65);
     }
 
     /**
