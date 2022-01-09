@@ -28,8 +28,16 @@ public class Scrabble {
 
     }
 
-    public String toString(){
-        return "C'est au joueur "+ this.numJoueur+ " de jouer."+ plateau;
+    
+    public String toString() {
+
+        String res = "";
+        res += this.numJoueur + "\n";
+        res += this.plateau + "\n";
+        res += "Joueur " + (this.numJoueur + 1) + " : " + this.joueurs[this.numJoueur].getNom() + ", c'est à vous de jouer\n" + "\n";
+        res += this.joueurs[this.numJoueur].getChevalet().toStringBis() + "\n";
+
+        return res;
     }
 
     public void partie() {
@@ -48,12 +56,7 @@ public class Scrabble {
 
         while ((this.sac.getNbTotEx() > 0 || joueurCourant.getChevalet().getNbTotEx() > 0) && nbJPassantLeurTour != this.joueurs.length) {
 
-            System.out.println(this.numJoueur);
-            System.out.println(this.plateau);
-
-            System.out.println("Joueur " + (this.numJoueur + 1) + " : " + joueurCourant.getNom() + ", c'est à vous de jouer\n");
-
-            System.out.println(joueurCourant.getChevalet().toStringBis());
+            System.out.println(this);
 
             int action = joueurCourant.joue(this.plateau, this.sac, Scrabble.nbPointsJeton);
 

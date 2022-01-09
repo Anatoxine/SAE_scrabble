@@ -395,7 +395,8 @@ public class MEE {
 
         while (resultat && i < mot.length()) {
 
-            indiceLettre = valeurLettre(mot.charAt(i));
+            indiceLettre = MEE.valeurLettre(mot.charAt(i));
+            System.out.println(mot.charAt(i));
             testLettre = this.transfere(temporaire, indiceLettre);
 
             if (!testLettre)
